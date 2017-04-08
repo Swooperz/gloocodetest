@@ -37,5 +37,5 @@ version 0.16.0.
 
 - Point your browser to the URL of the app root folder and enjoy .
 
-- To view the app already installed on an existing host. browse [here:](http://www.coloradocomputerguy.com/gluon/)
+- To view the app already installed on an existing host, browse [here - http://www.coloradocomputerguy.com/gluon/](http://www.coloradocomputerguy.com/gluon/)
 

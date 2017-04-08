@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<title>My Favorite Learning Resources</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+/* required style*/
+.none{display: none;}
+
+/* optional styles */
+table tr th, table tr td{font-size: 1.2rem;}
+.row{ margin:20px 20px 20px 20px;width: 100%;}
+.glyphicon{font-size: 20px;}
+.glyphicon-plus{float: right;}
+a.glyphicon{text-decoration: none;cursor: pointer;}
+.glyphicon-trash{margin-left: 10px;}
+.alert{
+    width: 50%;
+    border-radius: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="scripts/app.js"></script>
+</head>
+<body ng-app="gloocodeApp">
+<div class="container" ng-controller="userController" ng-init="getRecords()">
+    <div class="row">
+        <h2>My Favorite Learning Resources</h2>
+        <div class="panel panel-default users-content">
+            <div class="panel-heading">Resources <a href="javascript:void(0);" class="glyphicon glyphicon-plus" onClick="$('.formData').slideToggle();"></a></div>
+            <div class="alert alert-danger none"><p></p></div>
+            <div class="alert alert-success none"><p></p></div>
+            <div class="panel-body none formData">
+                <form class="form" name="userForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" ng-model="tempUserData.name"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" ng-model="tempUserData.description"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <input type="text" class="form-control" name="notes" ng-model="tempUserData.notes"/>
+                    </div>
+                    <a href="javascript:void(0);" class="btn btn-warning" onClick="$('.formData').slideUp();">Cancel</a>
+                    <a href="javascript:void(0);" class="btn btn-success" ng-hide="tempUserData.id" ng-click="addUser()">Add Resource</a>
+                    <a href="javascript:void(0);" class="btn btn-success" ng-hide="!tempUserData.id" ng-click="updateUser()">Update Resource</a>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th width="5%">#</th>
+                    <th width="20%">Name</th>
+                    <th width="30%">Description</th>
+                    <th width="20%">Notes</th>
+                    <th width="14%">Created</th>
+                    <th width="10%"></th>
+                </tr>
+                <tr ng-repeat="user in users | orderBy:'-created'">
+                    <td>{{$index + 1}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.description}}</td>
+                    <td>{{user.notes}}</td>
+                    <td>{{user.created}}</td>
+                    <td>
+                        <a href="javascript:void(0);" class="glyphicon glyphicon-edit" ng-click="editUser(user)"></a>
+                        <a href="javascript:void(0);" class="glyphicon glyphicon-trash" ng-click="deleteUser(user)"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
